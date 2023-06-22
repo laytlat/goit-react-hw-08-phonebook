@@ -12,6 +12,8 @@ import SharedLayout from 'components/SharedLayout/SharedLayout';
 import { useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { refreshCurrentUser } from 'redux/operations/authOperations';
+import PrivateRoute from 'utils/PrivateRoute';
+import PublicRoute from 'utils/PublicRoute';
 
 export function App() {
   const dispatch = useDispatch();
@@ -23,9 +25,31 @@ export function App() {
     <Container>
       <Routes>
         <Route path="/" element={<SharedLayout />}>
-          <Route path="register" element={<Register />} />
-          <Route path="login" element={<Login />} />
-          <Route path="contacts" element={<Contacts />} />
+          <Route
+            path="register"
+            element={
+              <PublicRoute restricted>
+                <Register />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="login"
+            element={
+              <PublicRoute restricted>
+                <Login />
+              </PublicRoute>
+            }
+          />
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute>
+                <Contacts />
+              </PrivateRoute>
+            }
+          />
+          <Route path="*" element={<Contacts />} />
         </Route>
       </Routes>
     </Container>

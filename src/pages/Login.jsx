@@ -27,7 +27,7 @@ export default function Login() {
 
   return (
     <div>
-      <h2>Please login</h2>
+      <h2>Please login or create new account</h2>
       <form onSubmit={handleSubmit}>
         <label>
           email

@@ -10,6 +10,7 @@ const initialState = {
   user: { name: null, email: null },
   token: null,
   isLoggedIn: false,
+  isRefreshingCurrentUser: false,
 };
 
 const authSlice = createSlice({
@@ -37,12 +38,17 @@ const authSlice = createSlice({
       state.isLoggedIn = false;
     },
     [logout.rejected](state, action) {},
-    [refreshCurrentUser.pending](state) {},
+    [refreshCurrentUser.pending](state) {
+      state.isRefreshingCurrentUser = true;
+    },
     [refreshCurrentUser.fulfilled](state, action) {
       state.user = action.payload;
       state.isLoggedIn = true;
+      state.isRefreshingCurrentUser = false;
     },
-    [refreshCurrentUser.rejected](state, action) {},
+    [refreshCurrentUser.rejected](state) {
+      state.isRefreshingCurrentUser = false;
+    },
   },
 });
 
