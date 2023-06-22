@@ -4,7 +4,7 @@ import {
   ContactListItemStyled,
   ContactListItemBtn,
 } from './ContactListItem.styled';
-import { deleteContact } from 'redux/operations';
+import { deleteContact } from 'redux/operations/contactsOperations';
 
 export function ContactListItem({ name, number, id }) {
   const dispatch = useDispatch();

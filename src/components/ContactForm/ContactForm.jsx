@@ -6,7 +6,7 @@ import {
   ContactBtn,
 } from './ContactForm.styled';
 import { useDispatch } from 'react-redux';
-import { addContact } from 'redux/operations';
+import { addContact } from 'redux/operations/contactsOperations';
 
 export function ContactForm() {
   const [name, setName] = useState('');
@@ -27,7 +27,7 @@ export function ContactForm() {
     e.preventDefault();
     const newContact = {
       name: name,
-      phone: number,
+      number: number,
     };
     dispatch(addContact(newContact));
     resetForm();

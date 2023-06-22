@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { ContactListItem } from '../ContactListItem/ContactListItem';
 import { ContactListStyled } from './ContactList.styled';
 import { useEffect } from 'react';
-import { fetchContacts } from 'redux/operations';
+import { fetchContacts } from 'redux/operations/contactsOperations';
 import { ColorRing } from 'react-loader-spinner';
 import {
   selectContacts,
@@ -27,7 +27,7 @@ export function ContactList() {
   const filteredContacts = contacts.items.filter(
     contact =>
       contact.name.toLowerCase().includes(normalizedFilter) ||
-      contact.phone.includes(filter)
+      contact.number.includes(filter)
   );
 
   return (
@@ -39,7 +39,7 @@ export function ContactList() {
             key={contact.id}
             name={contact.name}
             id={contact.id}
-            number={contact.phone}
+            number={contact.number}
           />
         );
       })}
