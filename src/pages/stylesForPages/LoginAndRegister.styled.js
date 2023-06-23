@@ -9,6 +9,7 @@ export const StyledForm = styled.form`
   flex-direction: column;
   gap: 15px;
   padding: 40px;
+  margin-top: 15px;
 
   background-color: #deeafc;
 
