@@ -1,9 +1,3 @@
-// import React, { useState, useEffect } from 'react';
-
-import { Container } from './App.styled';
-// import { ContactForm } from '../ContactForm/ContactForm';
-// import { ContactList } from '../ContactList/ContactList';
-// import { Filter } from 'components/Filter/Filter';
 import Register from 'pages/Register';
 import { Route, Routes } from 'react-router-dom';
 import Login from 'pages/Login';
@@ -22,7 +16,6 @@ export function App() {
   }, [dispatch]);
 
   return (
-    // <Container>
     <Routes>
       <Route path="/" element={<SharedLayout />}>
         <Route
@@ -52,6 +45,5 @@ export function App() {
         <Route path="*" element={<Contacts />} />
       </Route>
     </Routes>
-    // </Container>
   );
 }

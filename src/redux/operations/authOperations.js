@@ -23,7 +23,6 @@ export const register = createAsyncThunk(
         Notify.failure('Your password is too short');
         return thunkAPI.rejectWithValue();
       }
-      console.log(error);
       if (error.message === 'Request failed with status code 400') {
         Notify.failure('Whoops, this email is already used');
       }
@@ -45,12 +44,13 @@ export const login = createAsyncThunk('user/login', async (user, thunkAPI) => {
   }
 });
 
-export const logout = createAsyncThunk('user/logout', async () => {
+export const logout = createAsyncThunk('user/logout', async (_, thunkAPI) => {
   try {
     await axios.post('users/logout');
     unsetToken();
   } catch (error) {
-    console.log(error);
+    Notify.failure('Something went wrong, try again later');
+    return thunkAPI.rejectWithValue();
   }
 });
 

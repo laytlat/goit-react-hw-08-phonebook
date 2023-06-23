@@ -28,10 +28,6 @@ const rootReducer = combineReducers({
   auth: persistedReducer,
 });
 
-// export const store = configureStore({
-//   reducer: rootReducer,
-// });
-
 export const store = configureStore({
   reducer: rootReducer,
   middleware(getDefaultMiddleware) {
