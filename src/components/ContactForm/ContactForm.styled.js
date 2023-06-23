@@ -1,5 +1,10 @@
 import styled from '@emotion/styled';
 
+export const StyledFormTitle = styled.h2`
+  margin-bottom: 10px;
+  text-align: center;
+`;
+
 export const ContactFormStyled = styled.form`
   display: flex;
   flex-direction: column;

@@ -1,12 +1,22 @@
 import { ColorRing } from 'react-loader-spinner';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { logout } from 'redux/operations/authOperations';
 import {
   selectIsLoggedIn,
   selectIsRefreshingCurrentUser,
   selectUser,
 } from 'redux/selectors';
+import {
+  StyledAuthContainer,
+  StyledHeader,
+  StyledNav,
+  StyledNavLink,
+  StyledUserMenu,
+  StyledUserName,
+  StyledUserLogout,
+} from './SharedLayout.styled';
+import { Container } from 'components/App/App.styled';
 
 export default function SharedLayout() {
   const dispatch = useDispatch();
@@ -17,26 +27,31 @@ export default function SharedLayout() {
     <ColorRing />
   ) : (
     <>
-      <header>
-        <nav>
-          {isLoggedin && <NavLink to="/contacts">Contacts</NavLink>}
+      <StyledHeader>
+        <StyledNav>
+          {isLoggedin && <StyledNavLink to="/contacts">Contacts</StyledNavLink>}
           {!isLoggedin && (
-            <div>
-              <NavLink to="/register">Register</NavLink>
-              <NavLink to="/login">Login</NavLink>
-            </div>
+            <StyledAuthContainer>
+              <StyledNavLink to="/register">Register</StyledNavLink>
+              <StyledNavLink to="/login">Login</StyledNavLink>
+            </StyledAuthContainer>
           )}
           {isLoggedin && (
-            <div>
-              <p>{user?.name}</p>
-              <button type="button" onClick={() => dispatch(logout())}>
+            <StyledUserMenu>
+              <StyledUserName>{user?.name}</StyledUserName>
+              <StyledUserLogout
+                type="button"
+                onClick={() => dispatch(logout())}
+              >
                 Logout
-              </button>
-            </div>
+              </StyledUserLogout>
+            </StyledUserMenu>
           )}
-        </nav>
-      </header>
-      <Outlet />
+        </StyledNav>
+      </StyledHeader>
+      <Container>
+        <Outlet />
+      </Container>
     </>
   );
 }

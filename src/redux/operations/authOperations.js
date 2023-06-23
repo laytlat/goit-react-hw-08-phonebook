@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import axios from 'axios';
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
@@ -9,23 +10,38 @@ const unsetToken = () => {
   axios.defaults.headers.common.Authorization = '';
 };
 
-export const register = createAsyncThunk('user/register', async user => {
-  try {
-    const response = await axios.post('users/signup', user);
-    setToken(response.data.token);
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const register = createAsyncThunk(
+  'user/register',
+  async (user, thunkAPI) => {
+    try {
+      const response = await axios.post('users/signup', user);
+      setToken(response.data.token);
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      if (error.response.data._message === 'User validation failed') {
+        Notify.failure('Your password is too short');
+        return thunkAPI.rejectWithValue();
+      }
+      console.log(error);
+      if (error.message === 'Request failed with status code 400') {
+        Notify.failure('Whoops, this email is already used');
+      }
+      return thunkAPI.rejectWithValue();
+    }
   }
-});
+);
 
-export const login = createAsyncThunk('user/login', async user => {
+export const login = createAsyncThunk('user/login', async (user, thunkAPI) => {
   try {
     const response = await axios.post('users/login', user);
     setToken(response.data.token);
     return response.data;
   } catch (error) {
-    console.log(error);
+    if (error.message === 'Request failed with status code 400') {
+      Notify.failure('Sorry, you entered wrong email or password');
+    }
+    return thunkAPI.rejectWithValue();
   }
 });
 

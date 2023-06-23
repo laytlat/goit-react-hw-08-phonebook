@@ -22,36 +22,36 @@ export function App() {
   }, [dispatch]);
 
   return (
-    <Container>
-      <Routes>
-        <Route path="/" element={<SharedLayout />}>
-          <Route
-            path="register"
-            element={
-              <PublicRoute restricted>
-                <Register />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="login"
-            element={
-              <PublicRoute restricted>
-                <Login />
-              </PublicRoute>
-            }
-          />
-          <Route
-            path="contacts"
-            element={
-              <PrivateRoute>
-                <Contacts />
-              </PrivateRoute>
-            }
-          />
-          <Route path="*" element={<Contacts />} />
-        </Route>
-      </Routes>
-    </Container>
+    // <Container>
+    <Routes>
+      <Route path="/" element={<SharedLayout />}>
+        <Route
+          path="register"
+          element={
+            <PublicRoute restricted>
+              <Register />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="login"
+          element={
+            <PublicRoute restricted>
+              <Login />
+            </PublicRoute>
+          }
+        />
+        <Route
+          path="contacts"
+          element={
+            <PrivateRoute>
+              <Contacts />
+            </PrivateRoute>
+          }
+        />
+        <Route path="*" element={<Contacts />} />
+      </Route>
+    </Routes>
+    // </Container>
   );
 }

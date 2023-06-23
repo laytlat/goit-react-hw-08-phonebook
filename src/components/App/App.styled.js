@@ -6,6 +6,6 @@ export const Container = styled.div`
 
   justify-content: center;
   align-items: center;
-
-  padding: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
 `;

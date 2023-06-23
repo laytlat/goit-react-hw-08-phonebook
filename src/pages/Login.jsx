@@ -1,6 +1,14 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { login } from 'redux/operations/authOperations';
+import {
+  StyledTitle,
+  StyledForm,
+  StyledLabel,
+  StyledInput,
+  ButtonContainer,
+  StyledButton,
+} from './stylesForPages/LoginAndRegister.styled';
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -27,28 +35,30 @@ export default function Login() {
 
   return (
     <div>
-      <h2>Please login or create new account</h2>
-      <form onSubmit={handleSubmit}>
-        <label>
+      <StyledTitle>Please login or create new account</StyledTitle>
+      <StyledForm onSubmit={handleSubmit}>
+        <StyledLabel>
           email
-          <input
+          <StyledInput
             type="text"
             name="email"
             value={email}
             onChange={onHandleChange}
           />
-        </label>
-        <label>
+        </StyledLabel>
+        <StyledLabel>
           password
-          <input
+          <StyledInput
             type="password"
             name="password"
             value={password}
             onChange={onHandleChange}
           />
-        </label>
-        <button type="submit">Login</button>
-      </form>
+        </StyledLabel>
+        <ButtonContainer>
+          <StyledButton type="submit">Login</StyledButton>
+        </ButtonContainer>
+      </StyledForm>
     </div>
   );
 }
